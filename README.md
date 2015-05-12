@@ -1,5 +1,7 @@
 #Bernie
 
+This is a VPR Topic Page. See the generic [topic page repo](http://github.com/vprnet/topic-page) for the basic template.
+
 ##Copyright and License
 
 Copyright 2013 Vermont Public Radio
