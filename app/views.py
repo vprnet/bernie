@@ -8,7 +8,7 @@ from config import BASE_URL
 def index():
     tags = [182633668]
     page_url = BASE_URL + request.path
-    page_title = 'Bernie'
+    page_title = 'Bernie Sanders'
     page_explainer = ["VPR's guide to all things Bernie Sanders."]
     stories = api_feed(tags, numResults=10, thumbnail=True)
     reporters = reporter_list(tags)
