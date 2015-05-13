@@ -6,10 +6,10 @@ from config import BASE_URL
 
 @app.route('/')
 def index():
-    tags = [237184207]
+    tags = [182633668]
     page_url = BASE_URL + request.path
-    page_title = 'Campaign 2014'
-    page_explainer = ["VPR's guide to the 2014 campaign season. Get our latest coverage, special features and election news apps all in one place."]
+    page_title = 'Bernie'
+    page_explainer = ["VPR's guide to all things Bernie Sanders."]
     stories = api_feed(tags, numResults=10, thumbnail=True)
     reporters = reporter_list(tags)
 
