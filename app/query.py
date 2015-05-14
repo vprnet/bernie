@@ -91,52 +91,6 @@ def api_feed(tag, numResults=1, char_limit=240, thumbnail=False, sidebar=False):
     return story_list
 
 
-def reporter_list(tag, numResults=50):
-    """Queries the API for bylines and returns an ordered list of name
-    and a path to a photo. Reporters ordered by number of stories"""
-
-    stories = query_api(tag, numResults)
-
-    name_list = []
-    reporters = []
-    for story in stories:
-        try:
-            name = story['byline'][0]['name']['$text']
-        except KeyError:
-            continue
-        if name not in name_list:
-            name_list.append(name)
-            byline = {}
-            byline['name'] = name
-            try:
-                url = story['byline'][0]['link'][0]['$text']
-                byline['url'] = url
-                byline['image_src'] = reporter_image(url)
-                byline['count'] = 1
-                reporters.append(byline)
-            except KeyError:
-                pass
-        else:
-            for reporter in reporters:
-                if reporter['name'] == name:
-                    reporter['count'] += 1
-
-    reporters = sorted(reporters, key=lambda k: k['count'], reverse=True)
-
-    with open(ABSOLUTE_PATH + 'static/data/twitter.json') as f:
-        twitter_dict = json.load(f)
-
-    ranked_list = []
-    for reporter in reporters:
-        for twitter in twitter_dict['reporters']:
-            if reporter['name'] == twitter['name']:
-                reporter['handle'] = twitter['handle']
-        if reporter['image_src'] and reporter['count'] > 1:
-            ranked_list.append(reporter)
-
-    return ranked_list
-
-
 def query_api(tag, numResults=10):
     """Hits the NPR API, returns JSON story list"""
 

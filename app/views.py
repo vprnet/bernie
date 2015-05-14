@@ -1,5 +1,5 @@
 from index import app
-from query import api_feed, reporter_list
+from query import api_feed
 from flask import render_template, request
 from config import BASE_URL
 
@@ -11,7 +11,6 @@ def index():
     page_title = 'Bernie Sanders'
     page_explainer = ["VPR's guide to all things Bernie Sanders."]
     stories = api_feed(tags, numResults=10, thumbnail=True)
-    reporters = reporter_list(tags)
 
     featured = False
     #To add featured stories to right panel of topic page, add story API IDs
@@ -32,5 +31,4 @@ def index():
         stories=stories,
         social=social,
         featured=featured,
-        reporters=reporters,
         page_url=page_url)
