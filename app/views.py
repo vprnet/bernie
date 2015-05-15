@@ -8,8 +8,9 @@ from config import BASE_URL
 def index():
     tags = [182633668]
     page_url = BASE_URL + request.path
-    page_title = 'Following Bernie: A VPR Exclusive'
+    page_title = "Following Bernie: A VPR Exclusive"
     page_explainer = ["VPR's guide to all things Bernie Sanders."]
+    audio_explainer = "Bernie Announces His Run for President"
     stories = api_feed(tags, numResults=10, thumbnail=True)
 
     featured = False
@@ -28,6 +29,7 @@ def index():
     return render_template('content.html',
         page_title=page_title,
         page_explainer=page_explainer,
+        audio_explainer=audio_explainer,
         stories=stories,
         social=social,
         featured=featured,
