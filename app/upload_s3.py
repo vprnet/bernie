@@ -128,5 +128,5 @@ def set_metadata():
         k.set_contents_from_filename(f)
         k.make_public()
 
-    print '\nHealthcare page successfully updated'
+    print '\nPage successfully updated'
     print "On " + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')

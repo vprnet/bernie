@@ -8,7 +8,7 @@ from config import BASE_URL
 def index():
     tags = [182633668]
     page_url = BASE_URL + request.path
-    page_title = 'Bernie Sanders'
+    page_title = 'Following Bernie: A VPR Exclusive'
     page_explainer = ["VPR's guide to all things Bernie Sanders."]
     stories = api_feed(tags, numResults=10, thumbnail=True)
 
@@ -17,12 +17,12 @@ def index():
     #featured = api_feed([291752955, 292002570], numResults=2, thumbnail=True, sidebar=True)
 
     social = {
-        'title': "",
-        'subtitle': '',
+        'title': "Following Bernie",
+        'subtitle': "A VPR Exclusive",
         'img': '',
-        'description': "",
-        'twitter_text': "",
-        'twitter_hashtag': ''
+        'description': "Follow Bernie Through the Decades with VPR",
+        'twitter_text': "Follow Bernie Through the Decades with VPR",
+        'twitter_hashtag': ""
     }
 
     return render_template('content.html',
