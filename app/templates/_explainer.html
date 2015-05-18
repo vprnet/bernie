@@ -1,13 +1,10 @@
 <div class="row">
     <div class="col-sm-10 col-sm-offset-1 col-md-offset-0 col-md-12">
         <div id="about_page">
-            <h3>{{ page_title }}</h3>
+            <h3>{{ underwriter_explainer }}</h3>
             <div class="content_box">
-                {% for par in page_explainer %}
-                <p>{{ par }}</p>
-                {% endfor %}
+              {% include "_underwriter.html" %}
             </div>
-        {% include "_underwriter.html" %}
         </div>
     </div>
 </div>
