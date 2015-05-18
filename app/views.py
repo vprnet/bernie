@@ -13,17 +13,14 @@ def index():
     underwriter_explainer = "Brought to you by:"
     audio_explainer = "Bernie Announces His Run for President"
     stories = api_feed(tags, numResults=10, thumbnail=True)
-
-    featured = False
-    #To add featured stories to right panel of topic page, add story API IDs
-    #featured = api_feed([291752955, 292002570], numResults=2, thumbnail=True, sidebar=True)
+    featured = api_feed([392561138, 403584370], numResults=2, thumbnail=True, sidebar=True)
 
     social = {
         'title': "Following Bernie",
         'subtitle': "A VPR Exclusive",
         'img': '',
-        'description': "Follow Bernie Through the Decades with VPR",
-        'twitter_text': "Follow Bernie Through the Decades with VPR",
+        'description': "Follow Bernie with VPR",
+        'twitter_text': "Follow Bernie with VPR",
         'twitter_hashtag': ""
     }
 
