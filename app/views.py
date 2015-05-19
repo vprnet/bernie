@@ -9,7 +9,7 @@ def index():
     tags = [182633668]
     page_url = BASE_URL + request.path
     page_title = "Totally Bernie"
-    page_explainer = ["VPR's guide to all things Bernie Sanders."]
+    page_explainer = "Full Coverage Of Bernie Sanders' Presidential Run"
     underwriter_explainer = "Support From"
     audio_explainer = "Bernie Announces His Run for President"
     stories = api_feed(tags, numResults=10, thumbnail=True)
@@ -17,11 +17,11 @@ def index():
 
     social = {
         'title': "Totally Bernie",
-        'subtitle': "From VPR",
-        'img': 'http://mediad.publicbroadcasting.net/p/vpr/files/styles/medium/public/201505/bernie-sanders-martin-ap-20150430_0.jpg',
-        'description': "Totally Bernie from VPR",
-        'twitter_text': "Totally Bernie from VPR",
-        'twitter_hashtag': ""
+        'subtitle': "Full Coverage Of Bernie Sanders' Presidential Run",
+        'img': 'http://mediad.publicbroadcasting.net/p/vpr/files/styles/medium/public/201504/sanders-3-vpr-evancie-20141104.jpg',
+        'description': "Campaign news, features and analysis from the news team at Vermont Public Radio.",
+        'twitter_text': "Totally Bernie: Full Coverage Of Bernie Sanders' Presidential Run",
+        'twitter_hashtag': "VT"
     }
 
     return render_template('content.html',
