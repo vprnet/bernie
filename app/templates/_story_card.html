@@ -30,7 +30,7 @@
                 <p>{{ paragraph|safe }}</p>
             {% endfor %}
                 {% if story.audio %}
-                {{ macros.player(story.audio.mp3, story.audio.duration, "Listen To The Report") }}
+                {{ macros.player(story.audio.mp3, story.audio.duration, "Listen") }}
                 {% endif %}
             </div>
         </div>
