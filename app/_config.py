@@ -9,7 +9,7 @@ FREEZER_IGNORE_MIMETYPE_WARNINGS = True
 AWS_KEY = ''
 AWS_SECRET_KEY = ''
 AWS_BUCKET = 'www.vpr.net'
-AWS_DIRECTORY = 'sandbox/bernie'
+AWS_DIRECTORY = 'apps/bernie'
 
 NPR_API_KEY = ''
 
