@@ -1,0 +1,17 @@
+{% import "_macros.html" as macros %}
+{% for feature in featured1 %}
+<div class="row">
+    <div class="col-md-12 col-md-offset-0 col-sm-10 col-sm-offset-1">
+        <div class="featured">
+            <h3><a href="{{ feature.link }}" alt="Sanders Talks Campaign Strategy">Sanders Talks Campaign Strategy</a></h3>
+            <div class="content_box">
+                <img class="img-responsive" src="{{ url_for('static', filename=feature.image) }}">
+                    <p>Sen. Bernie Sanders joined VPR to talk about his campaign, the issues he's focusing on and his strategy for beating Hillary Clinton in the Democratic primary.</p>
+                {% if feature.audio %}
+                    {{ macros.player(feature.audio.mp3, feature.audio.duration, "Listen") }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

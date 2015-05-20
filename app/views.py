@@ -11,9 +11,10 @@ def index():
     page_title = "Totally Bernie"
     page_explainer = "Full Coverage Of Bernie Sanders' Presidential Run"
     underwriter_explainer = "Support From"
-    audio_explainer = "Bernie Announces His Run for President"
+    audio_explainer = "Full Audio: Bernie Sanders Announces His Run For President"
     stories = api_feed(tags, numResults=10, thumbnail=True)
-    featured = api_feed([392561138, 403584370], numResults=2, thumbnail=True, sidebar=True)
+    featured1 = api_feed([403584370], numResults=1, thumbnail=True, sidebar=True)
+    featured2 = api_feed([392561138], numResults=1, thumbnail=True, sidebar=True)
 
     social = {
         'title': "Totally Bernie",
@@ -31,5 +32,6 @@ def index():
         audio_explainer=audio_explainer,
         stories=stories,
         social=social,
-        featured=featured,
+        featured1=featured1,
+        featured2=featured2,
         page_url=page_url)

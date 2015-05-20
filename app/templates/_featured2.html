@@ -1,14 +1,12 @@
 {% import "_macros.html" as macros %}
-{% for feature in featured %}
+{% for feature in featured2 %}
 <div class="row">
     <div class="col-md-12 col-md-offset-0 col-sm-10 col-sm-offset-1">
         <div class="featured">
-            <h3><a href="{{ feature.link }}" alt="{{ feature.title }}">{{ feature.title }}</a></h3>
+            <h3><a href="{{ feature.link }}" alt="Bernie On Vermont Edition">Bernie On Vermont Edition</a></h3>
             <div class="content_box">
                 <img class="img-responsive" src="{{ url_for('static', filename=feature.image) }}">
-                {% for paragraph in feature.text %}
-                    <p>{{ paragraph }}</p>
-                {% endfor %}
+                    <p>Sen. Bernie Sanders was a guest on VPR's <span><i>Vermont Edition</i></span> to discuss domestic and international politics and take questions from listeners.</p>
                 {% if feature.audio %}
                     {{ macros.player(feature.audio.mp3, feature.audio.duration, "Listen") }}
                 {% endif %}
