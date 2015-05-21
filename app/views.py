@@ -8,9 +8,9 @@ from config import BASE_URL
 def index():
     tags = [182633668]
     page_url = BASE_URL + request.path
-    page_title = "Totally Bernie"
+    page_title = "Full Coverage Of Bernie Sanders' Presidential Run"
     page_explainer = "Full Coverage Of Bernie Sanders' Presidential Run"
-    audio_clips_explainer = "Full Audio: Bernie Through the Decades"
+    audio_clips_explainer = "Hear Bernie Sanders' Political Views Evolve (Or Not) Over The Decades"
     underwriter_explainer = "Support From"
     announcement_explainer = "Full Audio: Bernie Sanders Announces His Run For President"
     stories = api_feed(tags, numResults=10, thumbnail=True)
@@ -18,11 +18,11 @@ def index():
     featured2 = api_feed([392561138], numResults=1, thumbnail=True, sidebar=True)
 
     social = {
-        'title': "Totally Bernie",
-        'subtitle': "Full Coverage Of Bernie Sanders' Presidential Run",
+        'title': "Full Coverage Of Bernie Sanders' Presidential Run",
+        'subtitle': "From VPR",
         'img': 'http://mediad.publicbroadcasting.net/p/vpr/files/styles/medium/public/201504/sanders-3-vpr-evancie-20141104.jpg',
         'description': "Campaign news, features and analysis from the news team at Vermont Public Radio.",
-        'twitter_text': "Totally Bernie: Full Coverage Of Bernie Sanders' Presidential Run",
+        'twitter_text': "Full Coverage Of Bernie Sanders' Presidential Run",
         'twitter_hashtag': "VT"
     }
 
