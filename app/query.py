@@ -58,12 +58,11 @@ def api_feed(tag, numResults=1, char_limit=240, thumbnail=False, sidebar=False):
         # if len(i) > 1 ignores pars w/ no text, i.e. when images or audio
 
         char_count = 0
-        paragraphs_needed = 0
+        paragraphs_needed = 1
         par_count = len(full_text)
         while char_count < char_limit and paragraphs_needed < par_count:
             paragraph = full_text[paragraphs_needed]
             char_count += len(paragraph)
-            paragraphs_needed += 1
 
         text = full_text[:paragraphs_needed]
 
