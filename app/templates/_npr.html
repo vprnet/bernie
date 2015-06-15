@@ -1,11 +1,14 @@
+{% import "_macros.html" as macros %}
+{% for feature in npr %}
 <div class="row">
     <div class="col-md-12 col-md-offset-0 col-sm-10 col-sm-offset-1">
-        <div id="resources">
-            <div class="content_box"><a href="http://www.npr.org/tags/166791593/2016-presidential-race" target="_blank" alt="NPR's Full 2016 Presidential Campaign Coverage">
-                <h3>NPR's Full 2016 Presidential Campaign Coverage</h3>
-                <img src="http://www.vpr.net/sandbox/bernie/static/img/candidates.jpg" width="326" height="244"></a>
+        <div class="featured">
+            <h3><a href="http://www.npr.org/tags/166791593/2016-presidential-race" target="_blank" alt="NPR's Full 2016 Presidential Campaign Coverage">NPR's Full 2016 Presidential Campaign Coverage</h3>
+            <div class="content_box">
+                <img class="img-responsive" src="http://mediad.publicbroadcasting.net/p/vpr/files/201506/presidential-candidates-ap-neibergall-harnik-kaster-crop.jpg"></a>
                 <p>AP Photo/Charlie Neibergall/Nati Harnik/Carloyn Kaster</p>
             </div>
         </div>
     </div>
 </div>
+{% endfor %}
