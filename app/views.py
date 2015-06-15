@@ -16,6 +16,7 @@ def index():
     stories = api_feed(tags, numResults=10, thumbnail=True)
     featured1 = api_feed([403584370], numResults=1, thumbnail=True, sidebar=True)
     featured2 = api_feed([392561138], numResults=1, thumbnail=True, sidebar=True)
+    npr = api_feed([414198485], numResults=1, thumbnail=True, sidebar=True)
 
     social = {
         'title': "Full Coverage Of Bernie Sanders' Presidential Run",
@@ -36,4 +37,5 @@ def index():
         social=social,
         featured1=featured1,
         featured2=featured2,
+        npr=npr,
         page_url=page_url)
