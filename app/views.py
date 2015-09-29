@@ -13,7 +13,6 @@ def index():
     audio_clips_explainer = "Hear Bernie Sanders' Political Views (Not) Evolve Over The Decades"
     underwriter_explainer = "Support From"
     announcement_explainer = "Full Audio: Bernie Sanders Announces His Run For President"
-    documentary_explainer = "Coming October 6, 2015"
     stories = api_feed(tags, numResults=10, thumbnail=True)
     featured1 = api_feed([403584370], numResults=1, thumbnail=True, sidebar=True)
     featured2 = api_feed([392561138], numResults=1, thumbnail=True, sidebar=True)
@@ -34,7 +33,6 @@ def index():
         audio_clips_explainer=audio_clips_explainer,
         underwriter_explainer=underwriter_explainer,
         announcement_explainer=announcement_explainer,
-        documentary_explainer=documentary_explainer,
         stories=stories,
         social=social,
         featured1=featured1,
