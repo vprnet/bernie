@@ -20,14 +20,19 @@ def api_feed(tag, numResults=1, char_limit=240, thumbnail=False, sidebar=False):
     for story in stories:
         link = story['link'][0]['$text']
         date = convert_date(story['storyDate']['$text'])
-        title = story['title']['$text'].strip()
 
-        byline = {}
         try:
+            byline = {}
             byline['name'] = story['byline'][0]['name']['$text']
             byline['url'] = story['byline'][0]['link'][0]['$text']
         except KeyError:
             byline = False
+
+        try:
+            title = story['title']['$text'].strip()
+        except KeyError:
+            title = "Becoming Bernie: His Rise And His Record"
+
 
         try:  # if there's an image, determine orientation and define boundary
             story_image = story['image'][0]['crop'][0]
