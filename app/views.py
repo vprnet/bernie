@@ -6,7 +6,7 @@ from config import BASE_URL
 
 @app.route('/')
 def index():
-    tags = [182633668]
+    tags = [446989232]
     page_url = BASE_URL + request.path
     page_title = "Full Coverage Of Bernie Sanders' Presidential Run"
     page_explainer = "Full Coverage Of Bernie Sanders' Presidential Run"
