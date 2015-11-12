@@ -20,7 +20,7 @@ else:
     PROJECT_ROOT = '/'
 
 
-class WebFactionMiddleware(object):
+class WebFactionMiddleware:
 
     def __init__(self, app):
         self.app = app
