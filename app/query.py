@@ -25,7 +25,7 @@ def api_feed(tag, numResults=1, char_limit=240, thumbnail=False, sidebar=False):
         date = convert_date(story['storyDate']['$text'])
         title = story['title']['$text'].strip()
         byline = get_byline(story)
-        image, width, height, landscape = get_image_data(story)
+        image, landscape = get_image_data(story)
         audio = get_audio_data(story)
         text = get_text(story, char_limit)
         if thumbnail:
@@ -97,7 +97,7 @@ def get_image_data(story):
         image = False  # set equal to url string for default image
         landscape = False
 
-    return image, width, height, landscape
+    return image, landscape
 
 
 def query_api(tag, numResults=10):
