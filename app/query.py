@@ -9,10 +9,13 @@ from bs4 import BeautifulSoup as Soup
 from datetime import datetime
 from cStringIO import StringIO
 from config import NPR_API_KEY, ABSOLUTE_PATH
+from collections import namedtuple
 
 
 def api_feed(tag, numResults=1, char_limit=240, thumbnail=False, sidebar=False):
     """Query the NPR API using given tag ID, return dictionary of results"""
+
+    Story = namedtuple("Story", "title date link image text byline audio landscape")
 
     stories = query_api(tag, numResults)
 
@@ -21,73 +24,80 @@ def api_feed(tag, numResults=1, char_limit=240, thumbnail=False, sidebar=False):
         link = story['link'][0]['$text']
         date = convert_date(story['storyDate']['$text'])
         title = story['title']['$text'].strip()
-
-        try:
-            byline = {}
-            byline['name'] = story['byline'][0]['name']['$text']
-            byline['url'] = story['byline'][0]['link'][0]['$text']
-        except KeyError:
-            byline = False
-
-        try:  # if there's an image, determine orientation and define boundary
-            story_image = story['image'][0]['crop'][0]
-            image = story_image['src']
-            width = int(story_image['width'])
-            height = int(story_image['height'])
-            if int(width) > int(height):
-                landscape = True
-                if width > 728:  # biggest size for landscape photos
-                    width = 728
-            else:
-                landscape = False
-                if width > 223:  # biggest size for portrait photos
-                    width = 223
-        except KeyError:
-            image = False  # set equal to url string for default image
-            landscape = False
-
-        try:
-            audio = {}
-            audio_file = story['audio'][0]
-            audio['mp3'] = audio_file['format']['mp3'][0]['$text'].split('?')[0]
-            audio['duration'] = audio_file['duration']['$text']
-        except KeyError:
-            audio = False
-
-        full_text = [i['$text'] for i in story['text']['paragraph'] if len(i) > 1]
-        # if len(i) > 1 ignores pars w/ no text, i.e. when images or audio
-
-        char_count = 0
-        paragraphs_needed = 1
-        par_count = len(full_text)
-        while char_count < char_limit and paragraphs_needed < par_count:
-            paragraph = full_text[paragraphs_needed]
-            char_count += len(paragraph)
-
-        text = full_text[:paragraphs_needed]
-
+        byline = get_byline(story)
+        image, width, height, landscape = get_image_data(story)
+        audio = get_audio_data(story)
+        text = get_text(story, char_limit)
         if thumbnail:
-            try:
-                image_url = story['image'][0]['crop'][0]['src']
-                if sidebar:
-                    image = generate_thumbnail(image_url, preserve_ratio=True, size=(326, 326))
-                else:
-                    image = generate_thumbnail(image_url, preserve_ratio=True, size=(width, height))
-            except KeyError:
-                image = False
+            image = get_image_from_story(story)
 
-        story_list.append({
-            'title': title,
-            'date': date,
-            'link': link,
-            'image': image,
-            'text': text,
-            'byline': byline,
-            'audio': audio,
-            'landscape': landscape
-        })
+        a_story = Story(title=title,
+                        date=date,
+                        link=link,
+                        image=image,
+                        text=text,
+                        byline=byline,
+                        audio=audio,
+                        landscape=landscape)
+
+        story_list.append(a_story)
 
     return story_list
+
+
+def get_byline(story):
+    try:
+        byline = {}
+        byline['name'] = story['byline'][0]['name']['$text']
+        byline['url'] = story['byline'][0]['link'][0]['$text']
+    except KeyError:
+        byline = False
+
+    return byline
+
+
+def get_text(story, paragraphs_needed=1):
+    """get first paragraph of story"""
+    # if len(i) > 1 ignores paragraphs w/ no text, i.e. when images or audio
+    full_text = [i['$text'] for i in story['text']['paragraph'] if len(i) > 1]
+    text = full_text[:paragraphs_needed]
+
+    return text
+
+
+def get_audio_data(story):
+    """if the story has audio, make a dict of its info"""
+    try:
+        audio = {}
+        audio_file = story['audio'][0]
+        audio['mp3'] = audio_file['format']['mp3'][0]['$text'].split('?')[0]
+        audio['duration'] = audio_file['duration']['$text']
+    except KeyError:
+        audio = False
+
+    return audio
+
+
+def get_image_data(story):
+    """if there's an image, determine orientation and define boundary"""
+    try:
+        story_image = story['image'][0]['crop'][0]
+        image = story_image['src']
+        width = int(story_image['width'])
+        height = int(story_image['height'])
+        if int(width) > int(height):
+            landscape = True
+            if width > 728:  # biggest size for landscape photos
+                width = 728
+        else:
+            landscape = False
+            if width > 223:  # biggest size for portrait photos
+                width = 223
+    except KeyError:
+        image = False  # set equal to url string for default image
+        landscape = False
+
+    return image, width, height, landscape
 
 
 def query_api(tag, numResults=10):
@@ -125,6 +135,19 @@ def reporter_image(url):
         thumbnail = False
 
     return thumbnail
+
+
+def get_image_from_story(story):
+    try:
+        image_url = story['image'][0]['crop'][0]['src']
+        if sidebar:
+            image = generate_thumbnail(image_url, preserve_ratio=True, size=(326, 326))
+        else:
+            image = generate_thumbnail(image_url, preserve_ratio=True, size=(width, height))
+    except KeyError:
+        image = False
+
+    return image
 
 
 def generate_thumbnail(image_url, preserve_ratio=False, size=(220, 165)):
